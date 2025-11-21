@@ -318,16 +318,22 @@
             flex-wrap: wrap;
         }
 
+        .preview-section {
+            position: sticky;
+            top: 20px;
+        }
+
         .preview-container {
             background-color: white;
-            padding: 30px;
+            padding: 35px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            min-height: 1123px; /* A4 height */
+            min-height: 1200px; /* زيادة ارتفاع A4 */
             color: #333;
             position: relative;
-            width: 794px; /* A4 width */
+            width: 850px; /* زيادة عرض A4 */
             margin: 0 auto;
+            border: 1px solid #ddd;
         }
 
         .template-selector {
@@ -366,55 +372,69 @@
 
         .exam-header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #2c3e50;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid #2c3e50;
         }
 
         .institution-name {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: #2c3e50;
         }
 
         .exam-title {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
-            margin: 20px 0;
+            margin: 25px 0;
             color: #2c3e50;
         }
 
         .exam-info {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 16px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
         }
 
         .exercise-preview, .question-preview, .text-preview {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             page-break-inside: avoid;
         }
 
         .exercise-number, .question-number, .text-number {
             font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 18px;
+            margin-bottom: 18px;
+            font-size: 20px;
             color: #2c3e50;
-            padding-bottom: 5px;
-            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .points-display {
+            font-size: 16px;
+            color: #e74c3c;
+            font-weight: bold;
+            background: #f8f9fa;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #e74c3c;
         }
 
         .exercise-content, .question-content, .text-content {
-            margin-bottom: 10px;
-            min-height: 150px;
+            margin-bottom: 15px;
+            min-height: 180px;
             border: 1px dashed #ccc;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 20px;
+            border-radius: 8px;
             background-color: #f9f9f9;
-            font-size: 16px;
-            line-height: 1.8;
+            font-size: 17px;
+            line-height: 1.9;
             white-space: pre-wrap;
         }
 
@@ -422,29 +442,31 @@
             text-align: left;
             font-weight: bold;
             color: #e74c3c;
-            margin-top: 10px;
+            margin-top: 12px;
+            font-size: 16px;
         }
 
         .integration-situation, .situation-container {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #2c3e50;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 3px solid #2c3e50;
         }
 
         .integration-points {
             text-align: left;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             color: #e74c3c;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .teacher-signature {
-            margin-top: 40px;
+            margin-top: 50px;
             text-align: left;
-            padding-top: 20px;
-            border-top: 1px dashed #ccc;
+            padding-top: 25px;
+            border-top: 2px dashed #ccc;
             font-style: italic;
+            font-size: 18px;
         }
 
         .image-upload {
@@ -460,49 +482,52 @@
 
         .ruled-paper {
             background-image: linear-gradient(to bottom, transparent 95%, #e0e0e0 95%);
-            background-size: 100% 25px;
+            background-size: 100% 28px;
         }
 
         .framed-paper {
-            border: 3px solid #2c3e50;
-            padding: 25px;
+            border: 4px solid #2c3e50;
+            padding: 30px;
         }
 
         .decorative-paper {
-            border: 1px solid #ccc;
-            padding: 25px;
+            border: 2px solid #ccc;
+            padding: 30px;
             background: linear-gradient(135deg, #f9f9f9 0%, #fff 100%);
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
             position: relative;
         }
 
         .decorative-paper:before {
             content: "";
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid #e0e0e0;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #e0e0e0;
             pointer-events: none;
         }
 
         .arabic-analysis {
             background: #f8f9fa;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 10px 0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #dee2e6;
         }
 
         .analysis-section {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .analysis-title {
             font-weight: bold;
             color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 16px;
+            margin-bottom: 12px;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
         }
 
         .hidden {
@@ -562,30 +587,51 @@
             .preview-container {
                 width: 100%;
                 min-height: auto;
+                padding: 20px;
             }
+        }
+
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body class="light-mode language-ar">
-    <!-- نموذج التفعيل -->
-    <div id="activationModal" class="activation-modal">
-        <div class="activation-content">
-            <h2>تفعيل التطبيق</h2>
-            <p>أدخل كلمة السر لتفعيل التطبيق:</p>
-            <div class="password-input">
-                <input type="password" id="activationPassword" placeholder="أدخل كلمة السر">
-            </div>
-            <div class="password-hint">
-                (أدخل إحدى الكلمات: سبحان الله، الحمد لله، الله اكبر، اللهم صلي وسلم على سيدنا محمد)
-            </div>
-            <div class="actions">
-                <button class="btn btn-primary" id="activateBtn">تفعيل</button>
-            </div>
-            <p id="activationError" style="color: #e74c3c; margin-top: 15px; display: none;">كلمة السر غير صحيحة، حاول مرة أخرى</p>
+    <!-- شاشة التحميل -->
+    <div class="loading" id="loading">
+        <div style="text-align: center;">
+            <div class="loading-spinner"></div>
+            <div id="loadingText">جاري تحميل التطبيق...</div>
         </div>
     </div>
 
-    <div class="container" id="mainApp" style="display: none;">
+    <div class="container" id="mainApp">
         <div class="bismillah">بسم الله الرحمن الرحيم</div>
         
         <header>
@@ -735,46 +781,6 @@
     </div>
 
     <script>
-        // كلمات السر للتطبيق (واحدة منها تكفي)
-        const activationPasswords = [
-            "سبحان الله",
-            "الحمد لله", 
-            "الله اكبر",
-            "اللهم صلي و سلم على سيدنا محمد"
-        ];
-
-        // العناصر الأساسية في DOM
-        const activationModal = document.getElementById('activationModal');
-        const activationPassword = document.getElementById('activationPassword');
-        const activateBtn = document.getElementById('activateBtn');
-        const activationError = document.getElementById('activationError');
-        const mainApp = document.getElementById('mainApp');
-
-        const examType = document.getElementById('examType');
-        const subject = document.getElementById('subject');
-        const institutionName = document.getElementById('institutionName');
-        const className = document.getElementById('className');
-        const duration = document.getElementById('duration');
-        const teacherName = document.getElementById('teacherName');
-        const contentContainer = document.getElementById('contentContainer');
-        const previewBtn = document.getElementById('previewBtn');
-        const generatePdfBtn = document.getElementById('generatePdfBtn');
-        const generateWordBtn = document.getElementById('generateWordBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const themeToggle = document.getElementById('themeToggle');
-        const languageToggle = document.getElementById('languageToggle');
-        const templateOptions = document.querySelectorAll('.template-option');
-        const subjectBadge = document.getElementById('subjectBadge');
-        
-        // عناصر المعاينة
-        const previewContainer = document.getElementById('previewContainer');
-        const previewInstitution = document.getElementById('previewInstitution');
-        const previewTitleText = document.getElementById('previewTitleText');
-        const previewClass = document.getElementById('previewClass');
-        const previewDuration = document.getElementById('previewDuration');
-        const previewContent = document.getElementById('previewContent');
-        const previewTeacherSignature = document.getElementById('previewTeacherSignature');
-
         // بيانات الترجمة
         const translations = {
             ar: {
@@ -927,43 +933,46 @@
             civics: { ar: 'التربية المدنية', fr: 'Éducation Civique', en: 'Civics' }
         };
 
+        // العناصر الأساسية في DOM
+        const loading = document.getElementById('loading');
+        const loadingText = document.getElementById('loadingText');
+        const mainApp = document.getElementById('mainApp');
+
+        const examType = document.getElementById('examType');
+        const subject = document.getElementById('subject');
+        const institutionName = document.getElementById('institutionName');
+        const className = document.getElementById('className');
+        const duration = document.getElementById('duration');
+        const teacherName = document.getElementById('teacherName');
+        const contentContainer = document.getElementById('contentContainer');
+        const previewBtn = document.getElementById('previewBtn');
+        const generatePdfBtn = document.getElementById('generatePdfBtn');
+        const generateWordBtn = document.getElementById('generateWordBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const themeToggle = document.getElementById('themeToggle');
+        const languageToggle = document.getElementById('languageToggle');
+        const templateOptions = document.querySelectorAll('.template-option');
+        const subjectBadge = document.getElementById('subjectBadge');
+        
+        // عناصر المعاينة
+        const previewContainer = document.getElementById('previewContainer');
+        const previewInstitution = document.getElementById('previewInstitution');
+        const previewTitleText = document.getElementById('previewTitleText');
+        const previewClass = document.getElementById('previewClass');
+        const previewDuration = document.getElementById('previewDuration');
+        const previewContent = document.getElementById('previewContent');
+        const previewTeacherSignature = document.getElementById('previewTeacherSignature');
+
         // متغيرات التطبيق
         let currentLanguage = 'ar';
         let currentSubject = 'math';
 
-        // تحميل التطبيق مع التحقق من التفعيل
+        // تحميل التطبيق مباشرة بدون كلمة سر
         document.addEventListener('DOMContentLoaded', function() {
-            const isActivated = localStorage.getItem('appActivated');
-            if (isActivated === 'true') {
-                activationModal.style.display = 'none';
-                mainApp.style.display = 'block';
-                initializeApp();
-            } else {
-                activationModal.style.display = 'flex';
-            }
+            initializeApp();
         });
 
-        // تفعيل التطبيق
-        activateBtn.addEventListener('click', function() {
-            const enteredPassword = activationPassword.value.trim();
-            
-            const isPasswordValid = activationPasswords.some(password => 
-                password === enteredPassword
-            );
-            
-            if (isPasswordValid) {
-                localStorage.setItem('appActivated', 'true');
-                activationModal.style.display = 'none';
-                mainApp.style.display = 'block';
-                initializeApp();
-            } else {
-                activationError.style.display = 'block';
-                activationPassword.value = '';
-                activationPassword.focus();
-            }
-        });
-
-        // تهيئة التطبيق بعد التفعيل
+        // تهيئة التطبيق
         function initializeApp() {
             currentLanguage = localStorage.getItem('language') || 'ar';
             updateLanguage(currentLanguage);
@@ -971,6 +980,12 @@
             loadSubjectContent();
             updatePreview();
             loadSavedSettings();
+            
+            // إخفاء شاشة التحميل بعد ثانيتين
+            setTimeout(() => {
+                loading.style.display = 'none';
+                mainApp.style.display = 'block';
+            }, 1000);
         }
 
         // إعداد معالجات الأحداث
@@ -1075,6 +1090,9 @@
 
         // تحميل محتوى المواد الأدبية
         function loadLiteraryContent() {
+            const isFrench = currentSubject === 'french';
+            const isEnglish = currentSubject === 'english';
+            
             contentContainer.innerHTML = `
                 <div class="form-group">
                     <label for="textContent">${translations[currentLanguage].textLabel}</label>
@@ -1085,16 +1103,28 @@
                 <div class="arabic-analysis">
                     <div class="analysis-section">
                         <div class="analysis-title">${translations[currentLanguage].ideologicalAnalysis}</div>
-                        <textarea class="analysis-textarea" placeholder="${currentLanguage === 'ar' ? 'البناء الفكري...' : currentLanguage === 'fr' ? 'Analyse idéologique...' : 'Ideological analysis...'}"></textarea>
+                        <textarea class="analysis-textarea large-textarea" placeholder="${currentLanguage === 'ar' ? 'البناء الفكري...' : currentLanguage === 'fr' ? 'Analyse idéologique...' : 'Ideological analysis...'}"></textarea>
                     </div>
                     <div class="analysis-section">
                         <div class="analysis-title">${translations[currentLanguage].linguisticAnalysis}</div>
-                        <textarea class="analysis-textarea" placeholder="${currentLanguage === 'ar' ? 'البناء اللغوي...' : currentLanguage === 'fr' ? 'Analyse linguistique...' : 'Linguistic analysis...'}"></textarea>
+                        <textarea class="analysis-textarea large-textarea" placeholder="${currentLanguage === 'ar' ? 'البناء اللغوي...' : currentLanguage === 'fr' ? 'Analyse linguistique...' : 'Linguistic analysis...'}"></textarea>
                     </div>
                     <div class="analysis-section">
                         <div class="analysis-title">${translations[currentLanguage].stylisticAnalysis}</div>
-                        <textarea class="analysis-textarea" placeholder="${currentLanguage === 'ar' ? 'البناء الأسلوبي...' : currentLanguage === 'fr' ? 'Analyse stylistique...' : 'Stylistic analysis...'}"></textarea>
+                        <textarea class="analysis-textarea large-textarea" placeholder="${currentLanguage === 'ar' ? 'البناء الأسلوبي...' : currentLanguage === 'fr' ? 'Analyse stylistique...' : 'Stylistic analysis...'}"></textarea>
                     </div>
+                </div>
+                ` : ''}
+
+                ${isFrench || isEnglish ? `
+                <div class="form-group">
+                    <label for="comprehensionQuestions">${currentLanguage === 'ar' ? 'أسئلة الفهم' : currentLanguage === 'fr' ? 'Questions de compréhension' : 'Comprehension Questions'}</label>
+                    <textarea id="comprehensionQuestions" class="large-textarea" placeholder="${currentLanguage === 'ar' ? 'أسئلة فهم النص...' : currentLanguage === 'fr' ? 'Questions de compréhension du texte...' : 'Text comprehension questions...'}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="languageQuestions">${currentLanguage === 'ar' ? 'أسئلة اللغة' : currentLanguage === 'fr' ? 'Questions de langue' : 'Language Questions'}</label>
+                    <textarea id="languageQuestions" class="large-textarea" placeholder="${currentLanguage === 'ar' ? 'أسئلة القواعد والمفردات...' : currentLanguage === 'fr' ? 'Questions de grammaire et vocabulaire...' : 'Grammar and vocabulary questions...'}"></textarea>
                 </div>
                 ` : ''}
 
@@ -1239,9 +1269,11 @@
                 
                 content += `
                     <div class="exercise-preview">
-                        <div class="exercise-number">${currentLanguage === 'ar' ? 'التمرين' : currentLanguage === 'fr' ? 'Exercice' : 'Exercise'} ${index + 1}:</div>
+                        <div class="exercise-number">
+                            ${currentLanguage === 'ar' ? 'التمرين' : currentLanguage === 'fr' ? 'Exercice' : 'Exercise'} ${index + 1}:
+                            <span class="points-display">${points || '0'} ${currentLanguage === 'ar' ? 'نقطة' : currentLanguage === 'fr' ? 'point' : 'point'}</span>
+                        </div>
                         <div class="exercise-content">${exerciseContent || (currentLanguage === 'ar' ? `نص التمرين ${index + 1} سيظهر هنا` : currentLanguage === 'fr' ? `Le texte de l'exercice ${index + 1} apparaîtra ici` : `Exercise ${index + 1} text will appear here`)}</div>
-                        <div class="points-indicator">(${points || '0'} ${currentLanguage === 'ar' ? 'نقطة' : currentLanguage === 'fr' ? 'point' : 'point'})</div>
                     </div>
                 `;
             });
@@ -1262,13 +1294,18 @@
         function updateLiteraryPreview() {
             const textContent = document.getElementById('textContent').value;
             const writtenExpression = document.getElementById('writtenExpression').value;
+            const isFrench = currentSubject === 'french';
+            const isEnglish = currentSubject === 'english';
             
             let content = '';
             
             // النص
             content += `
                 <div class="text-preview">
-                    <div class="text-number">${translations[currentLanguage].textLabel}:</div>
+                    <div class="text-number">
+                        ${translations[currentLanguage].textLabel}
+                        <span class="points-display">${currentLanguage === 'ar' ? '6 نقاط' : currentLanguage === 'fr' ? '6 points' : '6 points'}</span>
+                    </div>
                     <div class="text-content">${textContent || (currentLanguage === 'ar' ? 'النص سيظهر هنا' : currentLanguage === 'fr' ? 'Le texte apparaîtra ici' : 'Text will appear here')}</div>
                 </div>
             `;
@@ -1296,10 +1333,34 @@
                 }
             }
             
+            // أسئلة اللغات الأجنبية
+            if (isFrench || isEnglish) {
+                const comprehensionQuestions = document.getElementById('comprehensionQuestions').value;
+                const languageQuestions = document.getElementById('languageQuestions').value;
+                
+                content += `
+                    <div class="question-preview">
+                        <div class="question-number">
+                            ${currentLanguage === 'ar' ? 'أسئلة الفهم' : currentLanguage === 'fr' ? 'Questions de compréhension' : 'Comprehension Questions'}
+                            <span class="points-display">${currentLanguage === 'ar' ? '6 نقاط' : currentLanguage === 'fr' ? '6 points' : '6 points'}</span>
+                        </div>
+                        <div class="question-content">${comprehensionQuestions || (currentLanguage === 'ar' ? 'أسئلة الفهم ستظهر هنا' : currentLanguage === 'fr' ? 'Les questions de compréhension apparaîtront ici' : 'Comprehension questions will appear here')}</div>
+                    </div>
+                    
+                    <div class="question-preview">
+                        <div class="question-number">
+                            ${currentLanguage === 'ar' ? 'أسئلة اللغة' : currentLanguage === 'fr' ? 'Questions de langue' : 'Language Questions'}
+                            <span class="points-display">${currentLanguage === 'ar' ? '4 نقاط' : currentLanguage === 'fr' ? '4 points' : '4 points'}</span>
+                        </div>
+                        <div class="question-content">${languageQuestions || (currentLanguage === 'ar' ? 'أسئلة اللغة ستظهر هنا' : currentLanguage === 'fr' ? 'Les questions de langue apparaîtront ici' : 'Language questions will appear here')}</div>
+                    </div>
+                `;
+            }
+            
             // التعبير الكتابي
             content += `
                 <div class="integration-situation">
-                    <div class="integration-points">${currentLanguage === 'ar' ? 'التعبير الكتابي: 8 نقاط' : currentLanguage === 'fr' ? 'Expression écrite: 8 points' : 'Written expression: 8 points'}</div>
+                    <div class="integration-points">${currentLanguage === 'ar' ? 'التعبير الكتابي: 4 نقاط' : currentLanguage === 'fr' ? 'Expression écrite: 4 points' : 'Written expression: 4 points'}</div>
                     <div class="exercise-content">${writtenExpression || (currentLanguage === 'ar' ? 'موضوع التعبير الكتابي سيظهر هنا' : currentLanguage === 'fr' ? 'Le sujet d\'expression écrite apparaîtra ici' : 'Written expression topic will appear here')}</div>
                 </div>
             `;
@@ -1313,7 +1374,10 @@
             
             let content = `
                 <div class="situation-container">
-                    <div class="text-number">${translations[currentLanguage].situationLabel}:</div>
+                    <div class="text-number">
+                        ${translations[currentLanguage].situationLabel}
+                        <span class="points-display">${currentLanguage === 'ar' ? '4 نقاط' : currentLanguage === 'fr' ? '4 points' : '4 points'}</span>
+                    </div>
                     <div class="text-content">${situationText || (currentLanguage === 'ar' ? 'نص الوضعية سيظهر هنا' : currentLanguage === 'fr' ? 'Le texte de la situation apparaîtra ici' : 'Situation text will appear here')}</div>
                 </div>
             `;
@@ -1326,9 +1390,11 @@
                 
                 content += `
                     <div class="question-preview">
-                        <div class="question-number">${currentLanguage === 'ar' ? 'سؤال' : currentLanguage === 'fr' ? 'Question' : 'Question'} ${index + 1}:</div>
+                        <div class="question-number">
+                            ${currentLanguage === 'ar' ? 'سؤال' : currentLanguage === 'fr' ? 'Question' : 'Question'} ${index + 1}
+                            <span class="points-display">${points || '0'} ${currentLanguage === 'ar' ? 'نقطة' : currentLanguage === 'fr' ? 'point' : 'point'}</span>
+                        </div>
                         <div class="question-content">${questionContent || (currentLanguage === 'ar' ? `نص السؤال ${index + 1} سيظهر هنا` : currentLanguage === 'fr' ? `Le texte de la question ${index + 1} apparaîtra ici` : `Question ${index + 1} text will appear here`)}</div>
-                        <div class="points-indicator">(${points || '0'} ${currentLanguage === 'ar' ? 'نقطة' : currentLanguage === 'fr' ? 'point' : 'point'})</div>
                     </div>
                 `;
             });
@@ -1416,9 +1482,52 @@
 
         // تصدير إلى PDF
         function generatePdf() {
-            alert(currentLanguage === 'ar' ? 'جاري تصدير النموذج إلى PDF...' : 
-                  currentLanguage === 'fr' ? 'Exportation du modèle en PDF...' : 
-                  'Exporting template to PDF...');
+            loading.style.display = 'flex';
+            loadingText.textContent = currentLanguage === 'ar' ? 'جاري تصدير PDF...' : 
+                                     currentLanguage === 'fr' ? 'Exportation PDF en cours...' : 
+                                     'Exporting PDF...';
+
+            setTimeout(() => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // الحصول على محتوى المعاينة
+                const previewElement = document.getElementById('previewContainer');
+                
+                // استخدام html2canvas لالتقاط لقطة للعنصر
+                html2canvas(previewElement, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const imgWidth = 210; // A4 width in mm
+                    const pageHeight = 295; // A4 height in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    
+                    let heightLeft = imgHeight;
+                    let position = 0;
+                    
+                    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                    
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight;
+                        doc.addPage();
+                        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+                    
+                    doc.save('نموذج_الاختبار.pdf');
+                    loading.style.display = 'none';
+                }).catch(error => {
+                    console.error('Error generating PDF:', error);
+                    alert(currentLanguage === 'ar' ? 'حدث خطأ في تصدير PDF' : 
+                          currentLanguage === 'fr' ? 'Erreur lors de l\'exportation PDF' : 
+                          'Error exporting PDF');
+                    loading.style.display = 'none';
+                });
+            }, 1000);
         }
 
         // تصدير إلى Word
