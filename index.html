@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
             --primary-color: #3498db;
@@ -56,7 +57,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1800px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -128,7 +129,7 @@
 
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.2fr;
             gap: 30px;
         }
 
@@ -284,6 +285,11 @@
             transform: translateY(-2px);
         }
 
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
         .actions {
             display: flex;
             gap: 15px;
@@ -296,9 +302,10 @@
             padding: 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            min-height: 600px;
+            min-height: 800px;
             color: #333;
             position: relative;
+            width: 100%;
         }
 
         .template-selector {
@@ -365,6 +372,7 @@
 
         .exercise-preview {
             margin-bottom: 30px;
+            page-break-inside: avoid;
         }
 
         .exercise-number {
@@ -378,11 +386,13 @@
 
         .exercise-content {
             margin-bottom: 10px;
-            min-height: 120px;
+            min-height: 150px;
             border: 1px dashed #ccc;
             padding: 15px;
             border-radius: 5px;
             background-color: #f9f9f9;
+            font-size: 16px;
+            line-height: 1.8;
         }
 
         .points-indicator {
@@ -425,6 +435,41 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
+        .draggable-image {
+            cursor: move;
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .draggable-image .resize-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #3498db;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            bottom: -5px;
+            right: -5px;
+            cursor: nwse-resize;
+        }
+
+        .draggable-image .delete-handle {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
         .ruled-paper {
             background-image: linear-gradient(to bottom, transparent 95%, #e0e0e0 95%);
             background-size: 100% 25px;
@@ -459,6 +504,110 @@
             height: auto;
             margin: 10px 0;
             border-radius: 5px;
+        }
+
+        .math-toolbar {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .math-btn {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .math-btn:hover {
+            background: #e9ecef;
+        }
+
+        .drawing-toolbar {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .drawing-btn {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .drawing-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .drawing-btn:hover {
+            background: #e9ecef;
+        }
+
+        .drawing-canvas-container {
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+            background: white;
+        }
+
+        .drawing-canvas {
+            width: 100%;
+            height: 300px;
+            cursor: crosshair;
+        }
+
+        .drawing-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .color-picker {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .line-width {
+            width: 60px;
+        }
+
+        .fraction {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .fraction span {
+            display: block;
+        }
+
+        .fraction .numerator {
+            border-bottom: 1px solid;
+            padding: 0 5px;
+        }
+
+        .fraction .denominator {
+            padding: 0 5px;
         }
 
         .activation-modal {
@@ -559,6 +708,51 @@
             .template-selector {
                 grid-template-columns: 1fr;
             }
+            
+            .math-toolbar, .drawing-toolbar {
+                flex-direction: column;
+            }
+        }
+
+        .exercise-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .fullscreen-toolbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .math-symbols {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .symbol-btn {
+            padding: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 3px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .symbol-btn:hover {
+            background: #f0f0f0;
         }
     </style>
 </head>
@@ -642,11 +836,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exerciseCount" id="exerciseCountLabel">عدد التمرينات</label>
+                        <label for="exerciseCount" id="exerciseCountLabel">عدد التمرينات (1-5)</label>
                         <select id="exerciseCount">
+                            <option value="1">تمرين واحد</option>
                             <option value="2">تمرينان</option>
                             <option value="3">ثلاثة تمارين</option>
                             <option value="4">أربعة تمارين</option>
+                            <option value="5">خمسة تمارين</option>
                         </select>
                     </div>
 
@@ -744,6 +940,75 @@
         </footer>
     </div>
 
+    <!-- نافذة الكتابة الكاملة للتمرين -->
+    <div id="fullscreenEditor" class="exercise-fullscreen" style="display: none;">
+        <div class="fullscreen-toolbar">
+            <h3 id="fullscreenTitle">كتابة التمرين</h3>
+            <div>
+                <button class="btn btn-sm btn-primary" id="closeFullscreen">إغلاق</button>
+                <button class="btn btn-sm btn-success" id="saveFullscreen">حفظ</button>
+            </div>
+        </div>
+        
+        <div class="math-toolbar">
+            <div class="math-symbols">
+                <button class="symbol-btn" data-symbol="√">√</button>
+                <button class="symbol-btn" data-symbol="²">x²</button>
+                <button class="symbol-btn" data-symbol="³">x³</button>
+                <button class="symbol-btn" data-symbol="⁴">x⁴</button>
+                <button class="symbol-btn" data-symbol="∞">∞</button>
+                <button class="symbol-btn" data-symbol="π">π</button>
+                <button class="symbol-btn" data-symbol="∆">∆</button>
+                <button class="symbol-btn" data-symbol="α">α</button>
+                <button class="symbol-btn" data-symbol="β">β</button>
+                <button class="symbol-btn" data-symbol="γ">γ</button>
+                <button class="symbol-btn" data-symbol="θ">θ</button>
+                <button class="symbol-btn" data-symbol="°">°</button>
+                <button class="symbol-btn" data-symbol="∑">∑</button>
+                <button class="symbol-btn" data-symbol="∫">∫</button>
+                <button class="symbol-btn" data-symbol="∂">∂</button>
+                <button class="symbol-btn" data-symbol="±">±</button>
+                <button class="symbol-btn" data-symbol="≠">≠</button>
+                <button class="symbol-btn" data-symbol="≈">≈</button>
+                <button class="symbol-btn" data-symbol="≤">≤</button>
+                <button class="symbol-btn" data-symbol="≥">≥</button>
+                <button class="symbol-btn" data-symbol="×">×</button>
+                <button class="symbol-btn" data-symbol="÷">÷</button>
+                <button class="symbol-btn" data-symbol="∠">∠</button>
+                <button class="symbol-btn" data-symbol="∥">∥</button>
+                <button class="symbol-btn" data-symbol="⊥">⊥</button>
+                <button class="symbol-btn" data-symbol="∴">∴</button>
+                <button class="symbol-btn" data-symbol="∵">∵</button>
+            </div>
+            
+            <div style="margin-top: 10px;">
+                <button class="math-btn" id="addFraction">كسر</button>
+                <button class="math-btn" id="addParentheses">( )</button>
+                <button class="math-btn" id="addBrackets">[ ]</button>
+                <button class="math-btn" id="addBraces">{ }</button>
+                <button class="math-btn" id="addPower">أس</button>
+                <button class="math-btn" id="addSubscript">أس سفلي</button>
+            </div>
+        </div>
+
+        <div class="drawing-toolbar">
+            <button class="drawing-btn" data-tool="select">تحديد</button>
+            <button class="drawing-btn" data-tool="line">خط</button>
+            <button class="drawing-btn" data-tool="rectangle">مستطيل</button>
+            <button class="drawing-btn" data-tool="circle">دائرة</button>
+            <button class="drawing-btn" data-tool="triangle">مثلث</button>
+            <input type="color" class="color-picker" id="drawingColor" value="#000000">
+            <input type="range" class="line-width" id="lineWidth" min="1" max="10" value="2">
+            <button class="btn btn-sm btn-danger" id="clearDrawing">مسح الرسم</button>
+        </div>
+
+        <div class="drawing-canvas-container">
+            <canvas id="drawingCanvas" class="drawing-canvas"></canvas>
+        </div>
+
+        <textarea id="fullscreenTextarea" style="width: 100%; height: 300px; margin-top: 20px; font-size: 16px; padding: 15px;"></textarea>
+    </div>
+
     <script>
         // كلمات السر للتطبيق (واحدة منها تكفي)
         const activationPasswords = [
@@ -790,6 +1055,17 @@
         const previewIntegrationImage = document.getElementById('previewIntegrationImage');
         const previewTeacherSignature = document.getElementById('previewTeacherSignature');
 
+        // عناصر المحرر الكامل
+        const fullscreenEditor = document.getElementById('fullscreenEditor');
+        const fullscreenTextarea = document.getElementById('fullscreenTextarea');
+        const closeFullscreen = document.getElementById('closeFullscreen');
+        const saveFullscreen = document.getElementById('saveFullscreen');
+        const fullscreenTitle = document.getElementById('fullscreenTitle');
+        const drawingCanvas = document.getElementById('drawingCanvas');
+        const clearDrawing = document.getElementById('clearDrawing');
+        const drawingColor = document.getElementById('drawingColor');
+        const lineWidth = document.getElementById('lineWidth');
+
         // بيانات الترجمة
         const translations = {
             ar: {
@@ -800,7 +1076,7 @@
                 classLabel: "المستوى الدراسي",
                 durationLabel: "المدة",
                 teacherLabel: "اسم الأستاذ (اختياري)",
-                exerciseCountLabel: "عدد التمرينات",
+                exerciseCountLabel: "عدد التمرينات (1-5)",
                 integrationLabel: "الوضعية الإدماجية",
                 imageLabel: "رفع صورة للوضعية الإدماجية (اختياري)",
                 templateTitle: "اختيار قالب الورقة",
@@ -816,7 +1092,10 @@
                 previewClassLabel: "المستوى:",
                 previewDurationLabel: "المدة:",
                 integrationPointsLabel: "تنقيط الوضعية الإدماجية: 8 نقاط",
-                teacherSignature: "الأستاذ:"
+                teacherSignature: "الأستاذ:",
+                fullscreenTitle: "كتابة التمرين - المساحة الكاملة",
+                closeFullscreen: "إغلاق",
+                saveFullscreen: "حفظ"
             },
             fr: {
                 setupTitle: "Configuration du Devoir ou de l'Examen",
@@ -826,7 +1105,7 @@
                 classLabel: "Niveau scolaire",
                 durationLabel: "Durée",
                 teacherLabel: "Nom du professeur (optionnel)",
-                exerciseCountLabel: "Nombre d'exercices",
+                exerciseCountLabel: "Nombre d'exercices (1-5)",
                 integrationLabel: "Situation d'intégration",
                 imageLabel: "Télécharger une image pour la situation d'intégration (optionnel)",
                 templateTitle: "Choisir un modèle de papier",
@@ -842,7 +1121,10 @@
                 previewClassLabel: "Niveau:",
                 previewDurationLabel: "Durée:",
                 integrationPointsLabel: "Barème de la situation d'intégration: 8 points",
-                teacherSignature: "Professeur:"
+                teacherSignature: "Professeur:",
+                fullscreenTitle: "Écriture de l'exercice - Espace complet",
+                closeFullscreen: "Fermer",
+                saveFullscreen: "Enregistrer"
             },
             en: {
                 setupTitle: "Homework or Test Setup",
@@ -852,7 +1134,7 @@
                 classLabel: "Class Level",
                 durationLabel: "Duration",
                 teacherLabel: "Teacher Name (optional)",
-                exerciseCountLabel: "Number of Exercises",
+                exerciseCountLabel: "Number of Exercises (1-5)",
                 integrationLabel: "Integration Situation",
                 imageLabel: "Upload Image for Integration Situation (optional)",
                 templateTitle: "Choose Paper Template",
@@ -868,12 +1150,21 @@
                 previewClassLabel: "Class:",
                 previewDurationLabel: "Duration:",
                 integrationPointsLabel: "Integration Situation Grading: 8 points",
-                teacherSignature: "Teacher:"
+                teacherSignature: "Teacher:",
+                fullscreenTitle: "Exercise Writing - Full Space",
+                closeFullscreen: "Close",
+                saveFullscreen: "Save"
             }
         };
 
         // متغيرات التطبيق
         let currentLanguage = 'ar';
+        let currentExerciseIndex = 0;
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let currentTool = 'select';
+        let ctx = null;
 
         // تحميل التطبيق مع التحقق من التفعيل
         document.addEventListener('DOMContentLoaded', function() {
@@ -935,6 +1226,9 @@
             
             // تحميل الإعدادات المحفوظة
             loadSavedSettings();
+            
+            // تهيئة لوحة الرسم
+            initializeDrawingCanvas();
         }
 
         // إعداد معالجات الأحداث
@@ -942,13 +1236,12 @@
             // تغيير نوع التقييم (فرض/اختبار)
             examType.addEventListener('change', function() {
                 updateExamType();
-                updateExerciseCount();
             });
 
             // تغيير المادة الدراسية
             subject.addEventListener('change', updateSubject);
 
-            // تحديث عدد التمرينات بناءً على نوع التقييم
+            // تحديث عدد التمرينات
             exerciseCount.addEventListener('change', generateExerciseInputs);
 
             // تحديث المعاينة
@@ -988,21 +1281,30 @@
 
             // معالجة رفع الصور
             integrationImage.addEventListener('change', handleImageUpload);
-        }
 
-        // تحديث عدد التمرينات بناءً على نوع التقييم
-        function updateExerciseCount() {
-            if (examType.value === 'homework') {
-                exerciseCount.innerHTML = `
-                    <option value="2">${currentLanguage === 'ar' ? 'تمرينان' : currentLanguage === 'fr' ? 'Deux exercices' : 'Two exercises'}</option>
-                    <option value="3">${currentLanguage === 'ar' ? 'ثلاثة تمارين' : currentLanguage === 'fr' ? 'Trois exercices' : 'Three exercises'}</option>
-                `;
-            } else {
-                exerciseCount.innerHTML = `
-                    <option value="4">${currentLanguage === 'ar' ? 'أربعة تمارين' : currentLanguage === 'fr' ? 'Quatre exercices' : 'Four exercises'}</option>
-                `;
-            }
-            generateExerciseInputs();
+            // أحداث المحرر الكامل
+            closeFullscreen.addEventListener('click', closeFullscreenEditor);
+            saveFullscreen.addEventListener('click', saveFullscreenContent);
+
+            // أحداث الرموز الرياضية
+            document.querySelectorAll('.symbol-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const symbol = this.getAttribute('data-symbol');
+                    insertAtCursor(fullscreenTextarea, symbol);
+                });
+            });
+
+            // أحداث أدوات الرسم
+            document.querySelectorAll('.drawing-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.drawing-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTool = this.getAttribute('data-tool');
+                });
+            });
+
+            // مسح الرسم
+            clearDrawing.addEventListener('click', clearDrawingCanvas);
         }
 
         // إنشاء حقول إدخال التمرينات
@@ -1016,12 +1318,35 @@
                 exerciseDiv.innerHTML = `
                     <div class="exercise-header">
                         <span class="exercise-title">${currentLanguage === 'ar' ? 'تمرين' : currentLanguage === 'fr' ? 'Exercice' : 'Exercise'} ${i}</span>
-                        <input type="number" class="exercise-points" placeholder="${currentLanguage === 'ar' ? 'النقاط' : currentLanguage === 'fr' ? 'Points' : 'Points'}" min="1" value="${i === count ? 4 : 3}">
+                        <div>
+                            <input type="number" class="exercise-points" placeholder="${currentLanguage === 'ar' ? 'النقاط' : currentLanguage === 'fr' ? 'Points' : 'Points'}" min="1" value="${i === count ? (count === 5 ? 4 : 6) : 4}">
+                            <button class="btn btn-sm btn-primary fullscreen-edit" data-exercise="${i}">
+                                <span>📝</span>
+                                ${currentLanguage === 'ar' ? 'كتابة كاملة' : currentLanguage === 'fr' ? 'Écrire en plein écran' : 'Fullscreen edit'}
+                            </button>
+                        </div>
                     </div>
                     <textarea class="exercise-content" placeholder="${currentLanguage === 'ar' ? `أدخل نص التمرين ${i} هنا` : currentLanguage === 'fr' ? `Entrez le texte de l'exercice ${i} ici` : `Enter exercise ${i} text here`}"></textarea>
                     <div class="image-upload">
                         <input type="file" class="exercise-image" accept="image/*" data-exercise="${i}">
                         <div class="image-preview-container" id="previewExercise${i}"></div>
+                    </div>
+                    <div class="math-toolbar">
+                        <button class="math-btn" data-symbol="√">√</button>
+                        <button class="math-btn" data-symbol="²">x²</button>
+                        <button class="math-btn" data-symbol="³">x³</button>
+                        <button class="math-btn" data-symbol="∞">∞</button>
+                        <button class="math-btn" data-symbol="π">π</button>
+                        <button class="math-btn" data-symbol="∆">∆</button>
+                        <button class="math-btn" data-symbol="°">°</button>
+                        <button class="math-btn" data-symbol="≠">≠</button>
+                        <button class="math-btn" data-symbol="≈">≈</button>
+                        <button class="math-btn" data-symbol="≤">≤</button>
+                        <button class="math-btn" data-symbol="≥">≥</button>
+                        <button class="math-btn" data-symbol="∠">∠</button>
+                        <button class="math-btn" id="addFractionBtn">كسر</button>
+                        <button class="math-btn" id="addParenthesesBtn">( )</button>
+                        <button class="math-btn" id="addBracketsBtn">[ ]</button>
                     </div>
                 `;
                 exercisesContainer.appendChild(exerciseDiv);
@@ -1031,7 +1356,191 @@
                 exerciseImageInput.addEventListener('change', function() {
                     handleExerciseImageUpload(this, i);
                 });
+
+                // إضافة مستمع حدث للكتابة الكاملة
+                const fullscreenBtn = exerciseDiv.querySelector('.fullscreen-edit');
+                fullscreenBtn.addEventListener('click', function() {
+                    openFullscreenEditor(i);
+                });
+
+                // إضافة مستمعات أحداث الرموز الرياضية
+                const mathBtns = exerciseDiv.querySelectorAll('.math-btn');
+                mathBtns.forEach(btn => {
+                    if (btn.id) {
+                        btn.addEventListener('click', function() {
+                            const textarea = exerciseDiv.querySelector('.exercise-content');
+                            handleMathButtonClick(this.id, textarea);
+                        });
+                    } else {
+                        btn.addEventListener('click', function() {
+                            const symbol = this.getAttribute('data-symbol');
+                            const textarea = exerciseDiv.querySelector('.exercise-content');
+                            insertAtCursor(textarea, symbol);
+                        });
+                    }
+                });
             }
+        }
+
+        // فتح المحرر الكامل
+        function openFullscreenEditor(exerciseIndex) {
+            currentExerciseIndex = exerciseIndex;
+            const exerciseDiv = document.querySelector(`.exercise-item:nth-child(${exerciseIndex})`);
+            const textarea = exerciseDiv.querySelector('.exercise-content');
+            
+            fullscreenTitle.textContent = `${translations[currentLanguage].fullscreenTitle} - ${translations[currentLanguage === 'ar' ? 'تمرين' : currentLanguage === 'fr' ? 'Exercice' : 'Exercise'} ${exerciseIndex}`;
+            fullscreenTextarea.value = textarea.value;
+            
+            fullscreenEditor.style.display = 'block';
+            fullscreenTextarea.focus();
+        }
+
+        // إغلاق المحرر الكامل
+        function closeFullscreenEditor() {
+            fullscreenEditor.style.display = 'none';
+        }
+
+        // حفظ المحتوى من المحرر الكامل
+        function saveFullscreenContent() {
+            const exerciseDiv = document.querySelector(`.exercise-item:nth-child(${currentExerciseIndex})`);
+            const textarea = exerciseDiv.querySelector('.exercise-content');
+            textarea.value = fullscreenTextarea.value;
+            
+            // حفظ الرسم كصورة إذا كان هناك رسم
+            if (drawingCanvas.toDataURL() !== clearDrawingCanvas()) {
+                const dataURL = drawingCanvas.toDataURL();
+                const img = document.createElement('img');
+                img.src = dataURL;
+                img.className = 'image-preview';
+                img.style.maxWidth = '100%';
+                
+                const previewContainer = document.getElementById(`previewExercise${currentExerciseIndex}`);
+                previewContainer.innerHTML = '';
+                previewContainer.appendChild(img);
+            }
+            
+            closeFullscreenEditor();
+            updatePreview();
+        }
+
+        // إدراج نص في المؤشر
+        function insertAtCursor(textarea, text) {
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const value = textarea.value;
+            
+            textarea.value = value.substring(0, start) + text + value.substring(end);
+            textarea.selectionStart = textarea.selectionEnd = start + text.length;
+            textarea.focus();
+        }
+
+        // معالجة أزرار الرياضيات
+        function handleMathButtonClick(buttonId, textarea) {
+            switch(buttonId) {
+                case 'addFractionBtn':
+                    insertAtCursor(textarea, '<div class="fraction"><span class="numerator">1</span><span class="denominator">2</span></div>');
+                    break;
+                case 'addParenthesesBtn':
+                    insertAtCursor(textarea, '()');
+                    // وضع المؤشر بين القوسين
+                    const start = textarea.selectionStart - 1;
+                    textarea.selectionStart = textarea.selectionEnd = start;
+                    break;
+                case 'addBracketsBtn':
+                    insertAtCursor(textarea, '[]');
+                    // وضع المؤشر بين الأقواس
+                    const start2 = textarea.selectionStart - 1;
+                    textarea.selectionStart = textarea.selectionEnd = start2;
+                    break;
+                case 'addFraction':
+                    insertAtCursor(fullscreenTextarea, '<div class="fraction"><span class="numerator">1</span><span class="denominator">2</span></div>');
+                    break;
+                case 'addParentheses':
+                    insertAtCursor(fullscreenTextarea, '()');
+                    const start3 = fullscreenTextarea.selectionStart - 1;
+                    fullscreenTextarea.selectionStart = fullscreenTextarea.selectionEnd = start3;
+                    break;
+                case 'addBrackets':
+                    insertAtCursor(fullscreenTextarea, '[]');
+                    const start4 = fullscreenTextarea.selectionStart - 1;
+                    fullscreenTextarea.selectionStart = fullscreenTextarea.selectionEnd = start4;
+                    break;
+                case 'addBraces':
+                    insertAtCursor(fullscreenTextarea, '{}');
+                    const start5 = fullscreenTextarea.selectionStart - 1;
+                    fullscreenTextarea.selectionStart = fullscreenTextarea.selectionEnd = start5;
+                    break;
+                case 'addPower':
+                    insertAtCursor(fullscreenTextarea, '^');
+                    break;
+                case 'addSubscript':
+                    insertAtCursor(fullscreenTextarea, '_');
+                    break;
+            }
+        }
+
+        // تهيئة لوحة الرسم
+        function initializeDrawingCanvas() {
+            ctx = drawingCanvas.getContext('2d');
+            drawingCanvas.width = drawingCanvas.offsetWidth;
+            drawingCanvas.height = drawingCanvas.offsetHeight;
+            
+            // أحداث الرسم
+            drawingCanvas.addEventListener('mousedown', startDrawing);
+            drawingCanvas.addEventListener('mousemove', draw);
+            drawingCanvas.addEventListener('mouseup', stopDrawing);
+            drawingCanvas.addEventListener('mouseout', stopDrawing);
+            
+            // أحداث اللمس
+            drawingCanvas.addEventListener('touchstart', handleTouch);
+            drawingCanvas.addEventListener('touchmove', handleTouch);
+            drawingCanvas.addEventListener('touchend', stopDrawing);
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            drawingCanvas.dispatchEvent(mouseEvent);
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const rect = drawingCanvas.getBoundingClientRect();
+            lastX = e.clientX - rect.left;
+            lastY = e.clientY - rect.top;
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const rect = drawingCanvas.getBoundingClientRect();
+            const currentX = e.clientX - rect.left;
+            const currentY = e.clientY - rect.top;
+            
+            ctx.strokeStyle = drawingColor.value;
+            ctx.lineWidth = lineWidth.value;
+            ctx.lineCap = 'round';
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+            
+            lastX = currentX;
+            lastY = currentY;
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearDrawingCanvas() {
+            ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+            return drawingCanvas.toDataURL();
         }
 
         // تحديث نوع التقييم في المعاينة
@@ -1060,7 +1569,6 @@
         // تحديث المادة الدراسية
         function updateSubject() {
             updateExamType();
-            // يمكن إضافة صور خاصة بكل مادة هنا في التطبيق الحقيقي
         }
 
         // تحديث المعاينة
@@ -1078,8 +1586,12 @@
             
             exerciseItems.forEach((item, index) => {
                 const points = item.querySelector('.exercise-points').value;
-                const content = item.querySelector('.exercise-content').value;
+                let content = item.querySelector('.exercise-content').value;
                 const exerciseImagePreview = item.querySelector('.image-preview-container').innerHTML;
+                
+                // معالجة الكسور والعناصر الرياضية
+                content = content.replace(/<div class="fraction"><span class="numerator">(.*?)<\/span><span class="denominator">(.*?)<\/span><\/div>/g, 
+                    '<div class="fraction" style="display: inline-block; text-align: center; vertical-align: middle; margin: 0 2px;"><span style="display: block; border-bottom: 1px solid; padding: 0 2px;">$1</span><span style="display: block; padding: 0 2px;">$2</span></div>');
                 
                 const exerciseDiv = document.createElement('div');
                 exerciseDiv.className = 'exercise-preview';
@@ -1144,7 +1656,7 @@
             
             updateLanguage(currentLanguage);
             updateExamType();
-            updateExerciseCount();
+            generateExerciseInputs();
             updatePreview();
             localStorage.setItem('language', currentLanguage);
         }
@@ -1182,7 +1694,7 @@
                 examType.value = 'homework';
                 subject.value = 'math';
                 updateExamType();
-                updateExerciseCount();
+                generateExerciseInputs();
                 
                 // إعادة تعيين القالب
                 templateOptions.forEach(opt => opt.classList.remove('active'));
@@ -1221,31 +1733,20 @@
 
         // تصدير إلى PDF
         function generatePdf() {
-            // في التطبيق الحقيقي، سيتم استخدام مكتبة jsPDF هنا
+            // استخدام مكتبة jsPDF للتصدير الفعلي
             alert(currentLanguage === 'ar' ? 'جاري تصدير النموذج إلى PDF...' : 
                   currentLanguage === 'fr' ? 'Exportation du modèle en PDF...' : 
                   'Exporting template to PDF...');
             
-            // مثال بسيط لاستخدام jsPDF (يتطلب إضافة المكتبة)
-            /*
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            // الحصول على محتوى المعاينة
-            const previewContent = document.getElementById('previewContainer');
-            
-            // استخدام html2canvas لالتقاط لقطة للعنصر
-            html2canvas(previewContent).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                doc.addImage(imgData, 'PNG', 10, 10, 190, 0);
-                doc.save('نموذج_الفرض.pdf');
-            });
-            */
+            // في التطبيق الحقيقي، سيتم استخدام:
+            // const { jsPDF } = window.jspdf;
+            // const doc = new jsPDF();
+            // ثم تحويل HTML إلى PDF
         }
 
         // تصدير إلى Word
         function generateWord() {
-            // في التطبيق الحقيقي، سيتم استخدام مكتبة docx هنا
+            // في التطبيق الحقيقي، سيتم استخدام مكتبة docx
             alert(currentLanguage === 'ar' ? 'جاري تصدير النموذج إلى Word...' : 
                   currentLanguage === 'fr' ? 'Exportation du modèle en Word...' : 
                   'Exporting template to Word...');
