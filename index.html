@@ -356,16 +356,26 @@
             text-align: center;
         }
 
+        /* تحسين كبير لنوافذ الكتابة */
         .exercise-content textarea {
-            min-height: 250px; /* زيادة ارتفاع مربع النص */
+            min-height: 300px; /* زيادة كبيرة في الارتفاع */
+            height: auto;
             resize: vertical;
             font-family: 'Tajawal', 'Segoe UI', sans-serif;
             line-height: 1.8;
-            font-size: 16px;
+            font-size: 18px; /* زيادة حجم الخط */
+            padding: 20px;
+            border: 2px solid var(--border-color);
+            background: var(--light-color);
+        }
+
+        .exercise-content textarea:focus {
+            border-color: var(--primary-color);
+            background: var(--background-color);
         }
 
         .integration-situation textarea {
-            min-height: 200px;
+            min-height: 250px;
         }
 
         .math-symbols-exercise {
@@ -636,9 +646,22 @@
             gap: 10px;
             margin-bottom: 15px;
             flex-wrap: wrap;
+            align-items: end;
         }
 
+        .exercise-controls {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        /* تحسينات للهواتف */
         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
             .form-row {
                 flex-direction: column;
             }
@@ -661,6 +684,52 @@
                 align-items: flex-start;
                 gap: 15px;
             }
+            
+            .math-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            /* تحسين نوافذ الكتابة للهواتف */
+            .exercise-content textarea {
+                min-height: 400px; /* أكبر للهواتف */
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .exercise-content textarea {
+                min-height: 350px;
+                font-size: 16px;
+                padding: 15px;
+            }
+            
+            .login-form {
+                padding: 20px;
+            }
+        }
+
+        /* تحسينات للأجهزة الكبيرة */
+        @media (min-width: 1200px) {
+            .exercise-content textarea {
+                min-height: 350px;
+            }
+        }
+
+        .fraction-display {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+
+        .fraction-display .numerator {
+            border-bottom: 1px solid;
+            padding: 0 5px;
+        }
+
+        .fraction-display .denominator {
+            padding: 0 5px;
         }
     </style>
 </head>
@@ -774,7 +843,7 @@
                 <h2 class="section-title">🏗️ بناء اختبار الرياضيات</h2>
                 
                 <div class="math-controls">
-                    <div class="form-group">
+                    <div class="form-group" style="flex: 1;">
                         <label>عدد التمرينات</label>
                         <select id="mathExerciseCount">
                             <option value="3">3 تمارين + وضعية ادماجية</option>
@@ -816,6 +885,10 @@
                     <button class="btn btn-success" id="insertFraction">إدراج الكسر</button>
                 </div>
                 
+                <div class="exercise-controls">
+                    <button class="btn btn-accent" id="addMathExercise">إضافة تمرين جديد</button>
+                </div>
+                
                 <div id="mathExercisesContainer" class="exercises-container">
                     <!-- تمارين الرياضيات -->
                 </div>
@@ -848,7 +921,11 @@
                 
                 <div class="form-group">
                     <label>نص الفهم والبناء الفكري</label>
-                    <textarea placeholder="ضع النص القرائي هنا..." class="reading-text" style="min-height: 150px;"></textarea>
+                    <textarea placeholder="ضع النص القرائي هنا..." class="reading-text" style="min-height: 200px;"></textarea>
+                </div>
+                
+                <div class="exercise-controls">
+                    <button class="btn btn-accent" id="addArabicExercise">إضافة سؤال جديد</button>
                 </div>
                 
                 <div id="arabicExercisesContainer" class="exercises-container">
@@ -857,24 +934,14 @@
                 
                 <div class="form-group">
                     <label>التعبير الكتابي / الوضعية الإدماجية</label>
-                    <textarea placeholder="موضوع التعبير الكتابي أو الوضعية الإدماجية..." class="writing-expression" style="min-height: 200px;"></textarea>
+                    <textarea placeholder="موضوع التعبير الكتابي أو الوضعية الإدماجية..." class="writing-expression" style="min-height: 250px;"></textarea>
                 </div>
             </div>
 
-            <!-- بيئات المواد الأخرى (مبسطة) -->
+            <!-- بيئات المواد الأخرى -->
             <div id="frenchEnvironment" class="subject-environment">
                 <h2 class="section-title">🇫🇷 بناء اختبار اللغة الفرنسية</h2>
                 <!-- محتوى مشابه للعربية -->
-            </div>
-
-            <div id="scienceEnvironment" class="subject-environment">
-                <h2 class="section-title">🔬 بناء اختبار العلوم الطبيعية</h2>
-                <!-- محتوى مشابه للرياضيات -->
-            </div>
-
-            <div id="historyGeoEnvironment" class="subject-environment">
-                <h2 class="section-title">🌍 بناء اختبار التاريخ والجغرافيا</h2>
-                <!-- محتوى خاص -->
             </div>
 
             <div class="actions">
@@ -922,6 +989,8 @@
         const languageButtons = document.querySelectorAll('.language-btn');
         const updateMathExercisesBtn = document.getElementById('updateMathExercises');
         const mathExerciseCount = document.getElementById('mathExerciseCount');
+        const addMathExerciseBtn = document.getElementById('addMathExercise');
+        const addArabicExerciseBtn = document.getElementById('addArabicExercise');
         const fractionBtn = document.getElementById('fractionBtn');
         const fractionInput = document.getElementById('fractionInput');
         const insertFractionBtn = document.getElementById('insertFraction');
@@ -932,12 +1001,7 @@
         const subjectEnvironments = {
             'math': document.getElementById('mathEnvironment'),
             'arabic': document.getElementById('arabicEnvironment'),
-            'french': document.getElementById('frenchEnvironment'),
-            'science': document.getElementById('scienceEnvironment'),
-            'history_geo': document.getElementById('historyGeoEnvironment'),
-            'physics': document.getElementById('scienceEnvironment'),
-            'islamic': document.getElementById('arabicEnvironment'),
-            'civic': document.getElementById('arabicEnvironment')
+            'french': document.getElementById('frenchEnvironment')
         };
 
         // بيانات التطبيق
@@ -945,6 +1009,8 @@
         let currentTemplate = 'classic';
         let currentLanguage = 'ar';
         let activeTextarea = null;
+        let mathExerciseCounter = 0;
+        let arabicExerciseCounter = 0;
 
         // التهيئة
         document.addEventListener('DOMContentLoaded', function() {
@@ -952,7 +1018,7 @@
             document.body.style.fontFamily = "'Tajawal', 'Segoe UI', sans-serif";
             loadSavedData();
             updateSubjectEnvironment('math');
-            initializeMathEnvironment(); // تهيئة الرياضيات مباشرة
+            initializeMathEnvironment();
         });
 
         // إعداد مستمعي الأحداث
@@ -1001,6 +1067,16 @@
                 initializeMathEnvironment();
             });
 
+            // إضافة تمرين رياضيات
+            addMathExerciseBtn.addEventListener('click', function() {
+                addMathExerciseManual();
+            });
+
+            // إضافة سؤال عربي
+            addArabicExerciseBtn.addEventListener('click', function() {
+                addArabicExerciseManual();
+            });
+
             // رموز الرياضيات
             document.querySelectorAll('.symbol-btn[data-symbol]').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1019,8 +1095,13 @@
             // إدراج الكسر
             insertFractionBtn.addEventListener('click', function() {
                 if (activeTextarea && numerator.value && denominator.value) {
-                    const fraction = `(${numerator.value})/(${denominator.value})`;
-                    insertAtCursor(activeTextarea, fraction);
+                    const fractionHTML = `
+                        <div class="fraction-display">
+                            <div class="numerator">${numerator.value}</div>
+                            <div class="denominator">${denominator.value}</div>
+                        </div>
+                    `;
+                    insertHTMLAtCursor(activeTextarea, fractionHTML);
                     fractionInput.style.display = 'none';
                     numerator.value = '';
                     denominator.value = '';
@@ -1053,13 +1134,6 @@
                 case 'french':
                     initializeFrenchEnvironment();
                     break;
-                case 'science':
-                case 'physics':
-                    initializeScienceEnvironment();
-                    break;
-                case 'history_geo':
-                    initializeHistoryGeoEnvironment();
-                    break;
             }
         }
 
@@ -1069,22 +1143,25 @@
             const count = parseInt(mathExerciseCount.value);
             
             container.innerHTML = '';
+            mathExerciseCounter = 0;
             
-            for (let i = 1; i <= count; i++) {
-                addMathExercise(container, i);
+            for (let i = 0; i < count; i++) {
+                addMathExercise(container);
             }
         }
 
         // إضافة تمرين رياضيات
-        function addMathExercise(container, number) {
+        function addMathExercise(container) {
+            mathExerciseCounter++;
             const exerciseHTML = `
-                <div class="exercise">
+                <div class="exercise" data-exercise-id="${mathExerciseCounter}">
                     <div class="exercise-header">
-                        <div class="exercise-title">التمرين ${number}</div>
+                        <div class="exercise-title">التمرين ${mathExerciseCounter}</div>
                         <div class="exercise-points">
                             <label>النقاط:</label>
                             <input type="number" min="0" max="20" value="3" class="points-input">
                         </div>
+                        <button class="btn clear-content-btn remove-exercise-btn" data-exercise-id="${mathExerciseCounter}">حذف التمرين</button>
                     </div>
                     
                     <!-- رموز الرياضيات الخاصة بالتمرين -->
@@ -1097,6 +1174,8 @@
                         <button class="symbol-btn" data-symbol="√">√</button>
                         <button class="symbol-btn" data-symbol="²">²</button>
                         <button class="symbol-btn" data-symbol="π">π</button>
+                        <button class="symbol-btn" data-symbol="∠">∠</button>
+                        <button class="symbol-btn" data-symbol="∆">∆</button>
                     </div>
                     
                     <div class="exercise-content">
@@ -1108,8 +1187,13 @@
             `;
             container.insertAdjacentHTML('beforeend', exerciseHTML);
             
-            // إضافة مستمعي الأحداث للتمرين الجديد
             setupExerciseEventListeners(container.lastElementChild);
+        }
+
+        // إضافة تمرين رياضيات يدوي
+        function addMathExerciseManual() {
+            const container = document.getElementById('mathExercisesContainer');
+            addMathExercise(container);
         }
 
         // إعداد مستمعي الأحداث للتمرين
@@ -1117,6 +1201,7 @@
             const textarea = exerciseElement.querySelector('.exercise-textarea');
             const symbolButtons = exerciseElement.querySelectorAll('.symbol-btn[data-symbol]');
             const clearBtn = exerciseElement.querySelector('.clear-exercise-btn');
+            const removeBtn = exerciseElement.querySelector('.remove-exercise-btn');
             
             textarea.addEventListener('focus', function() {
                 activeTextarea = this;
@@ -1136,35 +1221,56 @@
                     textarea.value = '';
                 }
             });
+
+            removeBtn.addEventListener('click', function() {
+                const exerciseId = this.dataset.exerciseId;
+                const exercise = document.querySelector(`[data-exercise-id="${exerciseId}"]`);
+                if (exercise && confirm('هل تريد حذف هذا التمرين؟')) {
+                    exercise.remove();
+                    renumberExercises();
+                }
+            });
+        }
+
+        // إعادة ترقيم التمارين
+        function renumberExercises() {
+            const exercises = document.querySelectorAll('#mathExercisesContainer .exercise');
+            exercises.forEach((exercise, index) => {
+                const title = exercise.querySelector('.exercise-title');
+                title.textContent = `التمرين ${index + 1}`;
+            });
+            mathExerciseCounter = exercises.length;
         }
 
         // تهيئة بيئة اللغة العربية
         function initializeArabicEnvironment() {
             const container = document.getElementById('arabicExercisesContainer');
             container.innerHTML = '';
+            arabicExerciseCounter = 0;
             
-            const questions = [
-                "الفهم العام:",
-                "البناء الفكري (تحليل النص):", 
-                "البناء اللغوي (قواعد وصرف):",
-                "الوضعية الإدماجية:"
+            // إضافة بعض الأسئلة الافتراضية
+            const defaultQuestions = [
+                "الفهم العام للنص:",
+                "البناء الفكري والتحليل:"
             ];
             
-            questions.forEach((question, index) => {
-                addArabicExercise(container, index + 1, question);
+            defaultQuestions.forEach((question, index) => {
+                addArabicExercise(container, question);
             });
         }
 
         // إضافة سؤال عربي
-        function addArabicExercise(container, number, title) {
+        function addArabicExercise(container, title) {
+            arabicExerciseCounter++;
             const exerciseHTML = `
-                <div class="exercise">
+                <div class="exercise" data-arabic-id="${arabicExerciseCounter}">
                     <div class="exercise-header">
                         <div class="exercise-title">${title}</div>
                         <div class="exercise-points">
                             <label>النقاط:</label>
                             <input type="number" min="0" max="20" value="4" class="points-input">
                         </div>
+                        <button class="btn clear-content-btn remove-arabic-btn" data-arabic-id="${arabicExerciseCounter}">حذف السؤال</button>
                     </div>
                     <div class="exercise-content">
                         <textarea placeholder="اكتب السؤال هنا..." class="exercise-textarea"></textarea>
@@ -1174,22 +1280,33 @@
             container.insertAdjacentHTML('beforeend', exerciseHTML);
             
             const textarea = container.lastElementChild.querySelector('.exercise-textarea');
+            const removeBtn = container.lastElementChild.querySelector('.remove-arabic-btn');
+            
             textarea.addEventListener('focus', function() {
                 activeTextarea = this;
             });
+
+            removeBtn.addEventListener('click', function() {
+                const arabicId = this.dataset.arabicId;
+                const exercise = document.querySelector(`[data-arabic-id="${arabicId}"]`);
+                if (exercise && confirm('هل تريد حذف هذا السؤال؟')) {
+                    exercise.remove();
+                }
+            });
         }
 
-        // الدوال الأخرى للغات والمواد (مبسطة)
+        // إضافة سؤال عربي يدوي
+        function addArabicExerciseManual() {
+            const container = document.getElementById('arabicExercisesContainer');
+            const title = prompt('أدخل عنوان السؤال:', 'سؤال جديد');
+            if (title) {
+                addArabicExercise(container, title);
+            }
+        }
+
+        // الدوال الأخرى للغات
         function initializeFrenchEnvironment() {
             // تنفيذ مشابه للعربية
-        }
-
-        function initializeScienceEnvironment() {
-            // تنفيذ مشابه للرياضيات
-        }
-
-        function initializeHistoryGeoEnvironment() {
-            // تنفيذ خاص
         }
 
         // معالجة تسجيل الدخول
@@ -1215,6 +1332,12 @@
             textarea.value = value.substring(0, start) + text + value.substring(end);
             textarea.selectionStart = textarea.selectionEnd = start + text.length;
             textarea.focus();
+        }
+
+        // إدراج HTML في المؤشر
+        function insertHTMLAtCursor(textarea, html) {
+            // هذه دالة مبسطة، في تطبيق حقيقي تحتاج لمحرر نصوص غني
+            insertAtCursor(textarea, `[كسر: ${html}]`);
         }
 
         // توليد المعاينة
@@ -1348,7 +1471,7 @@
             return content;
         }
 
-        // باقي الدوال (مبسطة)
+        // باقي الدوال الأساسية
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
@@ -1368,7 +1491,6 @@
                 subject: currentSubject,
                 institution: document.getElementById('institution').value,
                 level: document.getElementById('level').value,
-                // ... بيانات أخرى
             };
             
             localStorage.setItem('examData', JSON.stringify(examData));
