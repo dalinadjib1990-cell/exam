@@ -13,11 +13,11 @@
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
+            --accent-color: #e74c3c;
             --success-color: #27ae60;
             --warning-color: #f39c12;
-            --danger-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
             --border-radius: 8px;
             --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
@@ -93,10 +93,6 @@
             font-weight: 700;
         }
 
-        .logo-icon {
-            font-size: 28px;
-        }
-
         .controls {
             display: flex;
             gap: 12px;
@@ -115,7 +111,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
         }
 
         .main-content {
@@ -190,6 +185,7 @@
             padding: 15px;
             margin-bottom: 15px;
             border: 1px solid var(--border-color);
+            position: relative;
         }
 
         .exercise-header {
@@ -211,18 +207,91 @@
             font-size: 13px;
         }
 
+        .math-toolbar {
+            background: #f8f9fa;
+            border-radius: 4px;
+            padding: 8px;
+            margin: 8px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .math-btn {
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .math-btn:hover {
+            background: #e9ecef;
+        }
+
+        .drawing-tools {
+            background: #f8f9fa;
+            border-radius: 4px;
+            padding: 8px;
+            margin: 8px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .drawing-btn {
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .drawing-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .image-upload-container {
+            margin: 10px 0;
+        }
+
+        .draggable-image {
+            position: absolute;
+            cursor: move;
+            border: 2px dashed #3498db;
+            border-radius: 4px;
+            background: white;
+            padding: 5px;
+            z-index: 10;
+        }
+
+        .resize-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #3498db;
+            border: 1px solid white;
+            border-radius: 50%;
+            bottom: -5px;
+            right: -5px;
+            cursor: nwse-resize;
+        }
+
         .btn {
             padding: 10px 16px;
             border: none;
             border-radius: var(--border-radius);
             cursor: pointer;
             font-weight: 600;
-            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             font-size: 14px;
+            transition: var(--transition);
         }
 
         .btn-primary {
@@ -242,6 +311,11 @@
 
         .btn-danger {
             background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
             color: white;
         }
 
@@ -269,6 +343,39 @@
             margin: 0 auto;
             border: 1px solid #ddd;
             font-size: 14px;
+        }
+
+        .template-classic {
+            border: 2px solid #2c3e50;
+            background: linear-gradient(white, #f8f9fa);
+        }
+
+        .template-modern {
+            border: none;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .template-elegant {
+            border: 1px solid #e0e0e0;
+            background: white;
+            position: relative;
+        }
+
+        .template-elegant::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #f0f0f0;
+            pointer-events: none;
+        }
+
+        .template-lined {
+            background-image: linear-gradient(to bottom, transparent 95%, #e0e0e0 95%);
+            background-size: 100% 25px;
         }
 
         .exam-header {
@@ -301,10 +408,11 @@
 
         .exercise-preview {
             margin-bottom: 20px;
-            padding: 12px;
+            padding: 15px;
             border: 1px solid #e0e0e0;
-            border-radius: 5px;
+            border-radius: 6px;
             background: #fafafa;
+            position: relative;
         }
 
         .exercise-number {
@@ -332,13 +440,32 @@
         .exercise-content {
             margin-bottom: 8px;
             min-height: 60px;
-            padding: 10px;
+            padding: 12px;
             border-radius: 4px;
             background-color: #fff;
             font-size: 13px;
             line-height: 1.6;
             white-space: pre-wrap;
             border: 1px dashed #ccc;
+        }
+
+        .fraction {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .fraction span {
+            display: block;
+        }
+
+        .fraction .numerator {
+            border-bottom: 1px solid;
+            padding: 0 3px;
+        }
+
+        .fraction .denominator {
+            padding: 0 3px;
         }
 
         .integration-situation {
@@ -456,6 +583,31 @@
             100% { transform: rotate(360deg); }
         }
 
+        .template-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .template-option {
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .template-option.active {
+            border-color: var(--primary-color);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .template-option:hover {
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -568,11 +720,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exerciseCount" id="exerciseCountLabel">عدد التمرينات (1-3)</label>
+                        <label for="exerciseCount" id="exerciseCountLabel">عدد التمرينات (1-5)</label>
                         <select id="exerciseCount">
                             <option value="1">تمرين واحد</option>
                             <option value="2">تمرينان</option>
                             <option value="3">ثلاثة تمارين</option>
+                            <option value="4">أربعة تمارين</option>
+                            <option value="5">خمسة تمارين</option>
                         </select>
                     </div>
 
@@ -586,14 +740,40 @@
                     </div>
                 </div>
 
+                <div class="card">
+                    <h2 id="templateTitle">اختيار قالب الورقة</h2>
+                    <div class="template-selector">
+                        <div class="template-option active" data-template="classic">
+                            <div>📄 كلاسيكي</div>
+                        </div>
+                        <div class="template-option" data-template="modern">
+                            <div>🎨 حديث</div>
+                        </div>
+                        <div class="template-option" data-template="elegant">
+                            <div>✨ أنيق</div>
+                        </div>
+                        <div class="template-option" data-template="lined">
+                            <div>📝 مسطر</div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="actions">
-                    <button class="btn btn-primary" id="previewBtn">
+                    <button class="btn btn-primary" id="saveBtn">
+                        <span>💾</span>
+                        <span id="saveText">حفظ التغييرات</span>
+                    </button>
+                    <button class="btn btn-success" id="previewBtn">
                         <span>👁️</span>
                         <span id="previewText">معاينة</span>
                     </button>
-                    <button class="btn btn-success" id="generatePdfBtn">
+                    <button class="btn btn-accent" id="generatePdfBtn">
                         <span>📄</span>
                         <span id="pdfText">تصدير PDF</span>
+                    </button>
+                    <button class="btn btn-warning" id="generateWordBtn">
+                        <span>📝</span>
+                        <span id="wordText">تصدير Word</span>
                     </button>
                     <button class="btn btn-danger" id="resetBtn">
                         <span>🔄</span>
@@ -605,7 +785,7 @@
             <div class="preview-section">
                 <div class="card">
                     <h2 id="previewTitle">معاينة النموذج</h2>
-                    <div class="preview-container" id="previewContainer">
+                    <div class="preview-container template-classic" id="previewContainer">
                         <div class="exam-header">
                             <div class="institution-name" id="previewInstitution">اسم المؤسسة</div>
                             <div class="exam-title" id="previewTitleText">فرض مادة الرياضيات</div>
@@ -664,11 +844,14 @@
         const exerciseCount = document.getElementById('exerciseCount');
         const exercisesContainer = document.getElementById('exercisesContainer');
         const integrationSituation = document.getElementById('integrationSituation');
+        const saveBtn = document.getElementById('saveBtn');
         const previewBtn = document.getElementById('previewBtn');
         const generatePdfBtn = document.getElementById('generatePdfBtn');
+        const generateWordBtn = document.getElementById('generateWordBtn');
         const resetBtn = document.getElementById('resetBtn');
         const themeToggle = document.getElementById('themeToggle');
         const languageToggle = document.getElementById('languageToggle');
+        const templateOptions = document.querySelectorAll('.template-option');
         
         // عناصر المعاينة
         const previewContainer = document.getElementById('previewContainer');
@@ -690,11 +873,14 @@
                 classLabel: "المستوى الدراسي",
                 durationLabel: "المدة",
                 teacherLabel: "اسم الأستاذ (اختياري)",
-                exerciseCountLabel: "عدد التمرينات (1-3)",
+                exerciseCountLabel: "عدد التمرينات (1-5)",
                 integrationLabel: "الوضعية الإدماجية",
+                templateTitle: "اختيار قالب الورقة",
                 previewTitle: "معاينة النموذج",
+                saveText: "حفظ التغييرات",
                 previewText: "معاينة",
                 pdfText: "تصدير PDF",
+                wordText: "تصدير Word",
                 resetText: "إعادة تعيين",
                 previewClassLabel: "المستوى:",
                 previewDurationLabel: "المدة:",
@@ -709,11 +895,14 @@
                 classLabel: "Niveau scolaire",
                 durationLabel: "Durée",
                 teacherLabel: "Nom du professeur (optionnel)",
-                exerciseCountLabel: "Nombre d'exercices (1-3)",
+                exerciseCountLabel: "Nombre d'exercices (1-5)",
                 integrationLabel: "Situation d'intégration",
+                templateTitle: "Choisir un modèle de papier",
                 previewTitle: "Aperçu du modèle",
+                saveText: "Enregistrer les modifications",
                 previewText: "Aperçu",
                 pdfText: "Exporter PDF",
+                wordText: "Exporter Word",
                 resetText: "Réinitialiser",
                 previewClassLabel: "Niveau:",
                 previewDurationLabel: "Durée:",
@@ -728,11 +917,14 @@
                 classLabel: "Class Level",
                 durationLabel: "Duration",
                 teacherLabel: "Teacher Name (optional)",
-                exerciseCountLabel: "Number of Exercises (1-3)",
+                exerciseCountLabel: "Number of Exercises (1-5)",
                 integrationLabel: "Integration Situation",
+                templateTitle: "Choose Paper Template",
                 previewTitle: "Template Preview",
+                saveText: "Save Changes",
                 previewText: "Preview",
                 pdfText: "Export PDF",
+                wordText: "Export Word",
                 resetText: "Reset",
                 previewClassLabel: "Class:",
                 previewDurationLabel: "Duration:",
@@ -756,6 +948,11 @@
 
         // متغيرات التطبيق
         let currentLanguage = 'ar';
+        let currentData = {
+            exercises: [],
+            integration: '',
+            settings: {}
+        };
 
         // تحميل التطبيق مع التحقق من التفعيل
         document.addEventListener('DOMContentLoaded', function() {
@@ -802,6 +999,7 @@
             updateLanguage(currentLanguage);
             setupEventListeners();
             generateExerciseInputs();
+            loadSavedData();
             updatePreview();
             loadSavedSettings();
         }
@@ -811,11 +1009,28 @@
             examType.addEventListener('change', updateExamType);
             subject.addEventListener('change', updateExamType);
             exerciseCount.addEventListener('change', generateExerciseInputs);
+            saveBtn.addEventListener('click', saveData);
             previewBtn.addEventListener('click', updatePreview);
             themeToggle.addEventListener('click', toggleTheme);
             languageToggle.addEventListener('click', toggleLanguage);
             resetBtn.addEventListener('click', resetForm);
             generatePdfBtn.addEventListener('click', generatePdf);
+            generateWordBtn.addEventListener('click', generateWord);
+
+            templateOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    templateOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    const template = this.getAttribute('data-template');
+                    applyTemplate(template);
+                });
+            });
+        }
+
+        // تطبيق القالب المختار
+        function applyTemplate(template) {
+            previewContainer.className = 'preview-container';
+            previewContainer.classList.add(`template-${template}`);
         }
 
         // إنشاء حقول التمرينات
@@ -831,10 +1046,166 @@
                         <span class="exercise-title">${currentLanguage === 'ar' ? 'تمرين' : currentLanguage === 'fr' ? 'Exercice' : 'Exercise'} ${i}</span>
                         <input type="number" class="exercise-points" placeholder="${currentLanguage === 'ar' ? 'النقاط' : currentLanguage === 'fr' ? 'Points' : 'Points'}" min="1" value="${i === count ? 6 : 4}">
                     </div>
+                    
+                    <div class="math-toolbar">
+                        <button class="math-btn" data-symbol="√">√</button>
+                        <button class="math-btn" data-symbol="²">x²</button>
+                        <button class="math-btn" data-symbol="³">x³</button>
+                        <button class="math-btn" data-symbol="π">π</button>
+                        <button class="math-btn" data-symbol="∞">∞</button>
+                        <button class="math-btn" data-symbol="∆">∆</button>
+                        <button class="math-btn" data-symbol="∠">∠</button>
+                        <button class="math-btn" data-symbol="°">°</button>
+                        <button class="math-btn" id="addFraction">كسر</button>
+                        <button class="math-btn" data-symbol="()">()</button>
+                        <button class="math-btn" data-symbol="[]">[]</button>
+                        <button class="math-btn" data-symbol="%">%</button>
+                    </div>
+                    
                     <textarea class="exercise-content compact-textarea" placeholder="${currentLanguage === 'ar' ? `أدخل نص التمرين ${i} هنا` : currentLanguage === 'fr' ? `Entrez le texte de l'exercice ${i} ici` : `Enter exercise ${i} text here`}"></textarea>
+                    
+                    <div class="image-upload-container">
+                        <input type="file" class="exercise-image" accept="image/*" data-exercise="${i}">
+                        <button class="btn btn-sm" onclick="addDrawingCanvas(${i})">إضافة رسم</button>
+                    </div>
+                    
+                    <div class="image-preview-container" id="previewExercise${i}"></div>
                 `;
                 exercisesContainer.appendChild(exerciseDiv);
+
+                // إضافة مستمعات الأحداث للأزرار الرياضية
+                const mathBtns = exerciseDiv.querySelectorAll('.math-btn');
+                mathBtns.forEach(btn => {
+                    if (btn.id === 'addFraction') {
+                        btn.addEventListener('click', () => addFractionToExercise(i));
+                    } else {
+                        btn.addEventListener('click', () => {
+                            const symbol = btn.getAttribute('data-symbol');
+                            insertSymbolToExercise(i, symbol);
+                        });
+                    }
+                });
+
+                // إضافة مستمع لتحميل الصور
+                const imageInput = exerciseDiv.querySelector('.exercise-image');
+                imageInput.addEventListener('change', (e) => handleImageUpload(e, i));
             }
+        }
+
+        // إدراج رمز رياضي في التمرين
+        function insertSymbolToExercise(exerciseNum, symbol) {
+            const exerciseDiv = document.querySelector(`.exercise-item:nth-child(${exerciseNum})`);
+            const textarea = exerciseDiv.querySelector('.exercise-content');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const value = textarea.value;
+            
+            textarea.value = value.substring(0, start) + symbol + value.substring(end);
+            textarea.selectionStart = textarea.selectionEnd = start + symbol.length;
+            textarea.focus();
+        }
+
+        // إضافة كسر إلى التمرين
+        function addFractionToExercise(exerciseNum) {
+            const exerciseDiv = document.querySelector(`.exercise-item:nth-child(${exerciseNum})`);
+            const textarea = exerciseDiv.querySelector('.exercise-content');
+            const fraction = '<div class="fraction"><span class="numerator">1</span><span class="denominator">2</span></div>';
+            
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const value = textarea.value;
+            
+            textarea.value = value.substring(0, start) + fraction + value.substring(end);
+            textarea.focus();
+        }
+
+        // معالجة تحميل الصور
+        function handleImageUpload(event, exerciseNum) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewContainer = document.getElementById(`previewExercise${exerciseNum}`);
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'draggable-image';
+                    img.style.width = '150px';
+                    img.style.height = 'auto';
+                    img.style.position = 'absolute';
+                    img.style.top = '50px';
+                    img.style.left = '50px';
+                    img.style.zIndex = '10';
+                    
+                    // إضافة مقابض السحب والتغيير
+                    const resizeHandle = document.createElement('div');
+                    resizeHandle.className = 'resize-handle';
+                    img.appendChild(resizeHandle);
+                    
+                    makeElementDraggable(img);
+                    makeElementResizable(img);
+                    
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // جعل العنصر قابلاً للسحب
+        function makeElementDraggable(element) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            
+            element.onmousedown = dragMouseDown;
+            
+            function dragMouseDown(e) {
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+            
+            function elementDrag(e) {
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                element.style.top = (element.offsetTop - pos2) + "px";
+                element.style.left = (element.offsetLeft - pos1) + "px";
+            }
+            
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        // جعل العنصر قابلاً لتغيير الحجم
+        function makeElementResizable(element) {
+            const handle = element.querySelector('.resize-handle');
+            
+            handle.onmousedown = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const startX = e.clientX;
+                const startY = e.clientY;
+                const startWidth = parseInt(document.defaultView.getComputedStyle(element).width, 10);
+                const startHeight = parseInt(document.defaultView.getComputedStyle(element).height, 10);
+                
+                function doDrag(e) {
+                    element.style.width = (startWidth + e.clientX - startX) + 'px';
+                    element.style.height = (startHeight + e.clientY - startY) + 'px';
+                }
+                
+                function stopDrag() {
+                    document.documentElement.removeEventListener('mousemove', doDrag, false);
+                    document.documentElement.removeEventListener('mouseup', stopDrag, false);
+                }
+                
+                document.documentElement.addEventListener('mousemove', doDrag, false);
+                document.documentElement.addEventListener('mouseup', stopDrag, false);
+            };
         }
 
         // تحديث نوع التقييم في المعاينة
@@ -849,6 +1220,75 @@
             } else {
                 previewTitleText.textContent = `${currentLanguage === 'ar' ? 'اختبار مادة' : currentLanguage === 'fr' ? 'Examen de' : 'Test of'} ${subjectName}`;
                 previewDuration.textContent = currentLanguage === 'ar' ? 'ساعتان' : currentLanguage === 'fr' ? 'Deux heures' : 'Two hours';
+            }
+        }
+
+        // حفظ البيانات
+        function saveData() {
+            const exercises = [];
+            const exerciseItems = document.querySelectorAll('.exercise-item');
+            
+            exerciseItems.forEach((item, index) => {
+                const points = item.querySelector('.exercise-points').value;
+                const content = item.querySelector('.exercise-content').value;
+                const imagePreview = item.querySelector('.image-preview-container').innerHTML;
+                
+                exercises.push({
+                    number: index + 1,
+                    points: points,
+                    content: content,
+                    image: imagePreview
+                });
+            });
+            
+            currentData = {
+                exercises: exercises,
+                integration: integrationSituation.value,
+                settings: {
+                    institution: institutionName.value,
+                    className: className.value,
+                    duration: duration.value,
+                    teacher: teacherName.value,
+                    subject: subject.value,
+                    examType: examType.value
+                }
+            };
+            
+            localStorage.setItem('examData', JSON.stringify(currentData));
+            alert(currentLanguage === 'ar' ? 'تم حفظ البيانات بنجاح' : 
+                  currentLanguage === 'fr' ? 'Données enregistrées avec succès' : 
+                  'Data saved successfully');
+        }
+
+        // تحميل البيانات المحفوظة
+        function loadSavedData() {
+            const savedData = localStorage.getItem('examData');
+            if (savedData) {
+                currentData = JSON.parse(savedData);
+                
+                institutionName.value = currentData.settings.institution || '';
+                className.value = currentData.settings.className || '';
+                duration.value = currentData.settings.duration || '';
+                teacherName.value = currentData.settings.teacher || '';
+                subject.value = currentData.settings.subject || 'math';
+                examType.value = currentData.settings.examType || 'homework';
+                integrationSituation.value = currentData.integration || '';
+                
+                if (currentData.exercises.length > 0) {
+                    exerciseCount.value = currentData.exercises.length;
+                    generateExerciseInputs();
+                    
+                    setTimeout(() => {
+                        currentData.exercises.forEach((exercise, index) => {
+                            const exerciseDiv = document.querySelector(`.exercise-item:nth-child(${index + 1})`);
+                            if (exerciseDiv) {
+                                exerciseDiv.querySelector('.exercise-points').value = exercise.points;
+                                exerciseDiv.querySelector('.exercise-content').value = exercise.content;
+                                exerciseDiv.querySelector('.image-preview-container').innerHTML = exercise.image;
+                            }
+                        });
+                    }, 100);
+                }
             }
         }
 
@@ -868,6 +1308,7 @@
             exerciseItems.forEach((item, index) => {
                 const points = item.querySelector('.exercise-points').value;
                 const exerciseContent = item.querySelector('.exercise-content').value;
+                const imagePreview = item.querySelector('.image-preview-container').innerHTML;
                 
                 exercisesContent += `
                     <div class="exercise-preview">
@@ -876,6 +1317,7 @@
                             <span class="points-display">${points || '0'} ${currentLanguage === 'ar' ? 'نقطة' : currentLanguage === 'fr' ? 'point' : 'point'}</span>
                         </div>
                         <div class="exercise-content">${exerciseContent || (currentLanguage === 'ar' ? `نص التمرين ${index + 1} سيظهر هنا` : currentLanguage === 'fr' ? `Le texte de l'exercice ${index + 1} apparaîtra ici` : `Exercise ${index + 1} text will appear here`)}</div>
+                        ${imagePreview}
                     </div>
                 `;
             });
@@ -962,6 +1404,10 @@
                 updateExamType();
                 generateExerciseInputs();
                 
+                // حذف البيانات المحفوظة
+                localStorage.removeItem('examData');
+                currentData = { exercises: [], integration: '', settings: {} };
+                
                 // تحديث المعاينة
                 updatePreview();
             }
@@ -976,6 +1422,8 @@
 
             setTimeout(() => {
                 const { jsPDF } = window.jspdf;
+                
+                // إنشاء مستند PDF جديد
                 const doc = new jsPDF();
                 
                 // الحصول على محتوى المعاينة
@@ -987,25 +1435,23 @@
                     useCORS: true,
                     logging: false,
                     width: previewElement.scrollWidth,
-                    height: previewElement.scrollHeight
+                    height: previewElement.scrollHeight,
+                    scrollX: 0,
+                    scrollY: 0,
+                    windowWidth: previewElement.scrollWidth,
+                    windowHeight: previewElement.scrollHeight
                 }).then(canvas => {
                     const imgData = canvas.toDataURL('image/png');
                     const imgWidth = 210; // A4 width in mm
                     const imgHeight = canvas.height * imgWidth / canvas.width;
                     
-                    // حساب إذا كان المحتوى يحتاج لصفحتين
-                    if (imgHeight > 297) { // A4 height
-                        // صفحة أولى
-                        doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, '', 'FAST');
-                        
-                        // صفحة ثانية إذا لزم الأمر
-                        if (imgHeight > 297 * 2) {
-                            doc.addPage();
-                            doc.addImage(imgData, 'PNG', 0, -297, imgWidth, imgHeight, '', 'FAST');
-                        }
-                    } else {
-                        // محتوى صفحة واحدة
-                        doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                    // إضافة الصفحة الأولى
+                    doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                    
+                    // إذا كان المحتوى أطول من صفحة A4 واحدة، أضف صفحة ثانية
+                    if (imgHeight > 297) {
+                        doc.addPage();
+                        doc.addImage(imgData, 'PNG', 0, -297, imgWidth, imgHeight);
                     }
                     
                     const fileName = currentLanguage === 'ar' ? 'نموذج_الاختبار.pdf' : 
@@ -1025,6 +1471,14 @@
             }, 1000);
         }
 
+        // تصدير إلى Word
+        function generateWord() {
+            alert(currentLanguage === 'ar' ? 'جاري تصدير النموذج إلى Word...' : 
+                  currentLanguage === 'fr' ? 'Exportation du modèle en Word...' : 
+                  'Exporting template to Word...');
+            // يمكن إضافة منطق تصدير Word هنا
+        }
+
         // تحميل الإعدادات المحفوظة
         function loadSavedSettings() {
             const savedTheme = localStorage.getItem('theme');
@@ -1034,6 +1488,27 @@
                 document.body.classList.add('dark-mode');
                 themeToggle.textContent = '☀️';
             }
+        }
+
+        // دالة مساعدة لإضافة لوحة رسم (للاستخدام المستقبلي)
+        function addDrawingCanvas(exerciseNum) {
+            const previewContainer = document.getElementById(`previewExercise${exerciseNum}`);
+            const canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 200;
+            canvas.style.border = '1px solid #ccc';
+            canvas.style.margin = '10px 0';
+            
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            
+            previewContainer.appendChild(canvas);
+            
+            // يمكن إضافة منطق الرسم هنا
+            alert(currentLanguage === 'ar' ? 'تم إضافة لوحة رسم. يمكنك إضافة منطق الرسم حسب الحاجة.' : 
+                  currentLanguage === 'fr' ? 'Canvas de dessin ajouté. Vous pouvez ajouter la logique de dessin selon les besoins.' : 
+                  'Drawing canvas added. You can add drawing logic as needed.');
         }
     </script>
 </body>
